@@ -238,9 +238,8 @@ class DebugViewTests(SimpleTestCase):
     @override_settings(ROOT_URLCONF='view_tests.default_urls')
     def test_default_urlconf_template(self):
         """
-        Make sure that the default URLconf template is shown shown instead
-        of the technical 404 page, if the user has not altered their
-        URLconf yet.
+        Make sure that the default URLconf template is shown instead of the
+        technical 404 page, if the user has not altered their URLconf yet.
         """
         response = self.client.get('/')
         self.assertContains(
@@ -1481,7 +1480,7 @@ class NonHTMLResponseExceptionReporterFilter(ExceptionReportTestMixin, LoggingCa
     @override_settings(DEBUG=True, ROOT_URLCONF='view_tests.urls')
     def test_non_html_response_encoding(self):
         response = self.client.get('/raises500/', HTTP_ACCEPT='application/json')
-        self.assertEqual(response['Content-Type'], 'text/plain; charset=utf-8')
+        self.assertEqual(response.headers['Content-Type'], 'text/plain; charset=utf-8')
 
 
 class DecoratorsTests(SimpleTestCase):
